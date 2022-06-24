@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2864f0ad-f9a4-4280-a9b2-49d165a91d10" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/API-Gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/API-Gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-conversion/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currency-conversion/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/CurrencyConversion.java" beforeDir="false" afterPath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/model/CurrencyConversion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/CurrencyConversionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/controller/CurrencyConversionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/CurrencyExchangeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/currency-conversion/src/main/java/currencyConversion/helper/CurrencyExchangeProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/bin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/bin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExchange.class" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExchange.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExchangeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExchangeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExhangeApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/bin/src/main/java/currencyExchangeMicroservice/CurrencyExhangeApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/bin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/bin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-exhange/src/main/java/currencyExchangeMicroservice/CurrencyExchangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/currency-exhange/src/main/java/currencyExchangeMicroservice/CurrencyExchangeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/naming-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/naming-server/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2AwuZmUuAdizmNkCBlYcfSpnXko" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2864f0ad-f9a4-4280-a9b2-49d165a91d10" name="Changes" comment="" />
+      <created>1655933030820</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655933030820</updated>
+    </task>
+    <servers />
+  </component>
+</project>

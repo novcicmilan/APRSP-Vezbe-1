@@ -1,4 +1,4 @@
-package currencyConversion;
+package currencyConversion.model;
 
 import java.math.BigDecimal;
 
