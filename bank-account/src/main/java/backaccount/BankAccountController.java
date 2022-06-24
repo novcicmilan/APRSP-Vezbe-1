@@ -24,40 +24,40 @@ public class BankAccountController {
 			@PathVariable BigDecimal amount, @PathVariable BigDecimal total) {
 		BankAccount bankAcc = bankAccountRepository.findById(id).get();
 		
-		switch (from) {
-		case "usd":
+		switch (from.toUpperCase()) {
+		case "USD":
 			bankAcc.setUsd(bankAcc.getUsd().subtract(amount));
 			break;
-		case "gbp":
+		case "GBP":
 			bankAcc.setGbp(bankAcc.getGbp().subtract(amount));
 			break;
-		case "chf":
+		case "CHF":
 			bankAcc.setChf(bankAcc.getChf().subtract(amount));
 			break;
-		case "eur":
+		case "EUR":
 			bankAcc.setEur(bankAcc.getEur().subtract(amount));
 			break;
-		case "rsd":
+		case "RSD":
 			bankAcc.setRsd(bankAcc.getRsd().subtract(amount));
 			break;
 		default:
 			break;
 		}
 			
-		switch (to) {
-		case "usd":
+		switch (to.toUpperCase()) {
+		case "USD":
 			bankAcc.setUsd(bankAcc.getUsd().add(total));
 			break;
-		case "gbp":
+		case "GBP":
 			bankAcc.setGbp(bankAcc.getGbp().add(total));
 			break;
-		case "chf":
+		case "CHF":
 			bankAcc.setChf(bankAcc.getChf().add(total));
 			break;
-		case "eur":
+		case "EUR":
 			bankAcc.setEur(bankAcc.getEur().add(total));
 			break;
-		case "rsd":
+		case "RSD":
 			bankAcc.setRsd(bankAcc.getRsd().add(total));
 			break;
 		}

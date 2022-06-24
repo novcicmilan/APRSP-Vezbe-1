@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import currencyConversion.dto.BankAccountDto;
+import currencyConversion.helper.BankAccountProxy;
 import currencyConversion.helper.CurrencyExchangeProxy;
 import currencyConversion.model.CurrencyConversion;
 
@@ -19,6 +20,9 @@ public class CurrencyConversionController {
 
 	@Autowired
 	private CurrencyExchangeProxy proxy;
+	
+	@Autowired
+	private BankAccountProxy bankProxy;
 
 	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversion getConversion(@PathVariable String from, @PathVariable String to,
@@ -41,31 +45,31 @@ public class CurrencyConversionController {
 	public CurrencyConversion getConversionFeign(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity, @PathVariable String email) throws Exception {
 
-		BankAccountDto bankAcc = proxy.getBankAccount(email);
+		BankAccountDto bankAcc = bankProxy.getBankAccount(email);
 
 		try {
 			switch (from) {
-			case "usd":
+			case "USD":
 				if (bankAcc.getUsd().compareTo(quantity) < 0) {
 					throw new Exception("Not enought usd");
 				}
 				break;
-			case "gbp":
+			case "GBP":
 				if (bankAcc.getGbp().compareTo(quantity) < 0) {
 					throw new Exception("Not enough gbp");
 				}
 				break;
-			case "chf":
+			case "CHF":
 				if (bankAcc.getChf().compareTo(quantity) < 0) {
 					throw new Exception("Not enough chf");
 				}
 				break;
-			case "eur":
+			case "EUR":
 				if (bankAcc.getEur().compareTo(quantity) < 0) {
 					throw new Exception("Not enough eur");
 				}
 				break;
-			case "rsd":
+			case "RSD":
 				if (bankAcc.getRsd().compareTo(quantity) < 0) {
 					throw new Exception("Not enough rsd");
 				}
@@ -79,7 +83,7 @@ public class CurrencyConversionController {
 
 		CurrencyConversion temp = proxy.getExchange(from, to);
 		
-		proxy.exchangeCurrency(bankAcc.getId(), from, to, quantity, temp.getTotalConversionAmount());
+		bankProxy.exchangeCurrency(bankAcc.getId(), from, to, quantity, quantity.multiply(temp.getConversionMultiple()));
 
 		return new CurrencyConversion(temp.getId(), from, to, temp.getConversionMultiple(), quantity,
 				quantity.multiply(temp.getConversionMultiple()), temp.getEnvironment() + "feign");
