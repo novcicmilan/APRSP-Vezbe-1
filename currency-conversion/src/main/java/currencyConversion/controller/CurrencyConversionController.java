@@ -14,6 +14,7 @@ import currencyConversion.dto.BankAccountDto;
 import currencyConversion.helper.BankAccountProxy;
 import currencyConversion.helper.CurrencyExchangeProxy;
 import currencyConversion.model.CurrencyConversion;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 
 @RestController
 public class CurrencyConversionController {
@@ -25,6 +26,7 @@ public class CurrencyConversionController {
 	private BankAccountProxy bankProxy;
 
 	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
+	@RateLimiter(name = "default")
 	public CurrencyConversion getConversion(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity) {
 

@@ -18,6 +18,11 @@ public class BankAccountController {
 	public BankAccount getBankAccount(@PathVariable String email) {
 		return bankAccountRepository.findByEmailAddress(email);
 	}
+	
+	@GetMapping("/bank-account/{id}")
+	public BankAccount getBankAccount(@PathVariable Long id) {
+		return bankAccountRepository.findById(id).get();
+	}
 
 	@PutMapping("/bank-account/{id}/from/{from}/to/{to}/amount/{amount}/total/{total}")
 	public void exchangeCurrency(@PathVariable Long id, @PathVariable String from, @PathVariable String to,
@@ -63,6 +68,32 @@ public class BankAccountController {
 		}
 				
 		bankAccountRepository.save(bankAcc);
+	}
+	
+	@PutMapping("/bank-account/{id}/update/{update}/quantity/{quantity}")
+	public BankAccount updateOne(@PathVariable Long id, @PathVariable String update, @PathVariable BigDecimal quantity) {
+		
+		BankAccount bankAcc = bankAccountRepository.findById(id).get();
+		
+		switch (update.toUpperCase()) {
+		case "USD":
+			bankAcc.setUsd(bankAcc.getUsd().add(quantity));
+			break;
+		case "GBP":
+			bankAcc.setGbp(bankAcc.getGbp().add(quantity));
+			break;
+		case "CHF":
+			bankAcc.setChf(bankAcc.getChf().add(quantity));
+			break;
+		case "EUR":
+			bankAcc.setEur(bankAcc.getEur().add(quantity));
+			break;
+		case "RSD":
+			bankAcc.setRsd(bankAcc.getRsd().add(quantity));
+			break;
+		}
+				
+		return bankAccountRepository.save(bankAcc);
 	}
 }
 

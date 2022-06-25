@@ -17,16 +17,16 @@ public class BankAccount {
 	@Column(name="usd")
 	private BigDecimal usd;
 	
-	@Column(name="gbp")
+	@Column(name="gbp", precision = 20, scale=5)
 	private BigDecimal gbp;
 	
-	@Column(name="chf")
+	@Column(name="chf", precision = 20, scale=5)
 	private BigDecimal chf;
 	
-	@Column(name="eur")
+	@Column(name="eur", precision = 20, scale=5)
 	private BigDecimal eur;
 	
-	@Column(name="rsd")
+	@Column(name="rsd", precision = 50, scale=5)
 	private BigDecimal rsd;
 	
 	@Column(unique = true,name="email_address")
