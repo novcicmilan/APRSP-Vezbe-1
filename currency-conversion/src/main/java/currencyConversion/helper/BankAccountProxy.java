@@ -18,8 +18,8 @@ public interface BankAccountProxy {
 	@GetMapping("/bank-account/user/{email}")
 	BankAccountDto getBankAccount(@PathVariable String email);
 	
-	@PutMapping("/bank-account/{id}/from/{from}/to/{to}/amount/{amount}/total/{total}")
-	public void exchangeCurrency(@PathVariable Long id, @PathVariable String from, @PathVariable String to,
+	@PutMapping("/bank-account/{email}/from/{from}/to/{to}/amount/{amount}/total/{total}")
+	BankAccountDto exchangeCurrency(@PathVariable String email, @PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal amount, @PathVariable BigDecimal total);
 
 }

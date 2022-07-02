@@ -15,7 +15,6 @@ public class ApiGatewayConfiguration {
 	RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
 		return builder.routes().route(p -> p.path("/get").uri("http://httpbin.org:80"))
 				.route(p -> p.path("/currency-conversion/**").uri("lb://currency-conversion"))
-				.route(p -> p.path("/currency-conversion-feign/**").uri("lb://currency-conversion"))
 				.route(p -> p.path("/currency-exchange/**").uri("lb://currency-exchange"))
 				.route(p -> p.path("/bank-account/**").uri("lb://bank-account"))
 				.route(p -> p.path("/crypto-wallet/**").uri("lb://crypto-wallet"))

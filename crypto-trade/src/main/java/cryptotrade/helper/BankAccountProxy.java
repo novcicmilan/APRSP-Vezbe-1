@@ -12,9 +12,9 @@ import cryptotrade.dto.BankAccountDto;
 @FeignClient("bank-account")
 public interface BankAccountProxy {
 	
-	@GetMapping("/bank-account/{id}")
-	BankAccountDto getBankAccount(@PathVariable Long id);
+	@GetMapping("/bank-account/user/{email}")
+	BankAccountDto getBankAccount(@PathVariable String email);
 
-	@PutMapping("/bank-account/{id}/update/{update}/quantity/{quantity}")
-	BankAccountDto updateOne(@PathVariable Long id, @PathVariable String update, @PathVariable BigDecimal quantity);
+	@PutMapping("/bank-account/{email}/update/{update}/quantity/{quantity}")
+	BankAccountDto updateOne(@PathVariable String email, @PathVariable String update, @PathVariable BigDecimal quantity);
 }

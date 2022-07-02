@@ -12,9 +12,9 @@ import cryptoconversion.dto.CryptoWalletDto;
 @FeignClient("crypto-wallet")
 public interface CryptoWalletProxy {
 	
-	@GetMapping("/crypto-wallet/{id}")
-	CryptoWalletDto getById(@PathVariable Long id);
+	@GetMapping("/crypto-wallet/{email}")
+	CryptoWalletDto getWallet(@PathVariable String email);
 
-	@PutMapping("/crypto-wallet/{id}/from/{from}/to/{to}/quantity/{quantity}/total/{total}")
-	public void exchange(@PathVariable Long id, @PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity, @PathVariable BigDecimal total);
+	@PutMapping("/crypto-wallet/{email}/from/{from}/to/{to}/quantity/{quantity}/total/{total}")
+	CryptoWalletDto exchange(@PathVariable String email, @PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity, @PathVariable BigDecimal total);
 }

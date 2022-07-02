@@ -3,6 +3,7 @@ package cryptoconversion.controller;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +23,12 @@ public class CryptoConversionController {
 	@Autowired
 	private CryptoWalletProxy walletProxy;
 
-	@GetMapping("/crypto-conversion-feign/from/{from}/to/{to}/quantity/{quantity}/wallet/{id}")
+	@GetMapping("/crypto-conversion/from/{from}/to/{to}/quantity/{quantity}/wallet/{email}")
 	@RateLimiter(name = "default")
-	public CryptoConversion getConversion(@PathVariable String from, @PathVariable String to,
-			@PathVariable BigDecimal quantity, @PathVariable Long id) {
+	public ResponseEntity<Object> getConversion(@PathVariable String from, @PathVariable String to,
+			@PathVariable BigDecimal quantity, @PathVariable String email) {
 
-		CryptoWalletDto wallet = walletProxy.getById(id);
+		CryptoWalletDto wallet = walletProxy.getWallet(email);
 
 		try {
 			switch (from.toLowerCase()) {
@@ -51,14 +52,14 @@ public class CryptoConversionController {
 
 			}
 		} catch (Exception e) {
-				System.out.println(e.getMessage());
+				return ResponseEntity.ok("NOT SUPPOERTED CURRENCY");
 		}
 
 		CryptoConversion temp = proxy.getExchange(from, to);
 		
-		walletProxy.exchange(id, from, to, quantity, quantity.multiply(temp.getMultiple()));
+		CryptoWalletDto walletExchanged = walletProxy.exchange(email, from, to, quantity, quantity.multiply(temp.getMultiple()));
 
-		return new CryptoConversion(temp.getId(), from, to, temp.getMultiple(), quantity,
-				quantity.multiply(temp.getMultiple()), temp.getEnvironment() + "feign");
+		return ResponseEntity.ok(walletExchanged); 
+				
 	}
 }

@@ -12,9 +12,9 @@ import cryptotrade.dto.CryptoWalletDto;
 @FeignClient("crypto-wallet")
 public interface CryptoWalletProxy {
 
-	@GetMapping("/crypto-wallet/{id}")
-	CryptoWalletDto getById(@PathVariable Long id);	
+	@GetMapping("/crypto-wallet/{email}")
+	CryptoWalletDto getWallet(@PathVariable String email);	
 	
-	@PutMapping("/crypto-wallet/{id}/update/{update}/quantity/{quantity}")
-	CryptoWalletDto updateOne(@PathVariable Long id, @PathVariable String update, @PathVariable BigDecimal quantity);
+	@PutMapping("/crypto-wallet/{email}/update/{update}/quantity/{quantity}")
+	CryptoWalletDto updateOne(@PathVariable String email, @PathVariable String update, @PathVariable BigDecimal quantity);
 }

@@ -12,8 +12,6 @@ public class CryptoWalletDto {
 	
 	private BigDecimal ada; 
 	
-	private Long bankAccountId;
-	
 	private String emailAddress;
 
 	public Long getId() {
@@ -30,10 +28,6 @@ public class CryptoWalletDto {
 
 	public BigDecimal getAda() {
 		return ada;
-	}
-
-	public Long getBankAccountId() {
-		return bankAccountId;
 	}
 
 	public String getEmailAddress() {

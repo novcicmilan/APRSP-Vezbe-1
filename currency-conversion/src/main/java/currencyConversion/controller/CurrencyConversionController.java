@@ -25,70 +25,53 @@ public class CurrencyConversionController {
 	@Autowired
 	private BankAccountProxy bankProxy;
 
-	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
-	@RateLimiter(name = "default")
-	public CurrencyConversion getConversion(@PathVariable String from, @PathVariable String to,
-			@PathVariable BigDecimal quantity) {
 
-		HashMap<String, String> uriVariables = new HashMap<>();
-		uriVariables.put("from", from);
-		uriVariables.put("to", to);
-
-		ResponseEntity<CurrencyConversion> response = new RestTemplate().getForEntity(
-				"http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversion.class, uriVariables);
-
-		CurrencyConversion temp = response.getBody();
-
-		return new CurrencyConversion(temp.getId(), from, to, temp.getConversionMultiple(), quantity,
-				quantity.multiply(temp.getConversionMultiple()), temp.getEnvironment());
-	}
-
-	@GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}/user/{email}")
-	public CurrencyConversion getConversionFeign(@PathVariable String from, @PathVariable String to,
+	@GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}/user/{email}")
+	public ResponseEntity<Object> getConversionFeign(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity, @PathVariable String email) throws Exception {
 
 		BankAccountDto bankAcc = bankProxy.getBankAccount(email);
+		if(bankAcc == null) {
+			return ResponseEntity.ok("BANK ACCOUNT NOT FOUND.");
+		}
 
 		try {
-			switch (from) {
+			switch (from.toUpperCase()) {
 			case "USD":
 				if (bankAcc.getUsd().compareTo(quantity) < 0) {
-					throw new Exception("Not enought usd");
+					throw new Exception("USD");
 				}
 				break;
 			case "GBP":
 				if (bankAcc.getGbp().compareTo(quantity) < 0) {
-					throw new Exception("Not enough gbp");
+					throw new Exception("GBP");
 				}
 				break;
 			case "CHF":
 				if (bankAcc.getChf().compareTo(quantity) < 0) {
-					throw new Exception("Not enough chf");
+					throw new Exception("CHF");
 				}
 				break;
 			case "EUR":
 				if (bankAcc.getEur().compareTo(quantity) < 0) {
-					throw new Exception("Not enough eur");
+					throw new Exception("EUR");
 				}
 				break;
 			case "RSD":
 				if (bankAcc.getRsd().compareTo(quantity) < 0) {
-					throw new Exception("Not enough rsd");
+					throw new Exception("RSD");
 				}
 				break;
 			default:
-				throw new Exception("Unsuported currency");
+				return ResponseEntity.ok("USUPPORTED CURRENCY");
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			return ResponseEntity.ok("NOT ENOUGH " + e.getMessage());
 		}
 
 		CurrencyConversion temp = proxy.getExchange(from, to);
 		
-		bankProxy.exchangeCurrency(bankAcc.getId(), from, to, quantity, quantity.multiply(temp.getConversionMultiple()));
-
-		return new CurrencyConversion(temp.getId(), from, to, temp.getConversionMultiple(), quantity,
-				quantity.multiply(temp.getConversionMultiple()), temp.getEnvironment() + "feign");
+		return ResponseEntity.ok(bankProxy.exchangeCurrency(bankAcc.getEmailAddress(), from, to, quantity, quantity.multiply(temp.getConversionMultiple())));
 	}
 
 }

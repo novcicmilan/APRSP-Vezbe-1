@@ -3,6 +3,7 @@ package cryptotrade.controller;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +17,12 @@ import io.github.resilience4j.retry.annotation.Retry;
 public class CryptoTradeController {
 
 	@Autowired
-	private CryptoToRealExchangeService service;
+	CryptoToRealExchangeService service;
 	
-	@GetMapping("/crypto-trade/from/{from}/to/{to}/sender/{sender}/reciever/{reciever}/quantity/{quantity}")
-	@Retry(name = "sample-api", fallbackMethod = "hardCodedResponse")
-	@RateLimiter(name = "default")
-	@Bulkhead(name = "default")
-	private Object trade(@PathVariable String from, @PathVariable String to, @PathVariable Long sender, @PathVariable Long reciever, @PathVariable BigDecimal quantity) {
-		return service.trade(from, to, quantity, sender, reciever);
+	@GetMapping("/crypto-trade/from/{from}/to/{to}/user/{email}/quantity/{quantity}")
+	private ResponseEntity<Object> trade(@PathVariable String from, @PathVariable String to, @PathVariable String email, @PathVariable BigDecimal quantity) {
+		Object temp = service.trade(from, to, quantity, email);
+		
+		return ResponseEntity.ok(temp);
 	}
 }

@@ -27,14 +27,14 @@ public class CryptoWalletController {
 		return service.create(createDto);
 	}
 	
-	@GetMapping("/crypto-wallet/{id}")
-	public CryptoWallet getById(@PathVariable Long id) {
-		return service.findById(id);
+	@GetMapping("/crypto-wallet/{email}")
+	public CryptoWallet getWallet(@PathVariable String email) {
+		return service.findByEmailAddress(email);
 	}
 	
-	@PutMapping("/crypto-wallet/{id}/from/{from}/to/{to}/quantity/{quantity}/total/{total}")
-	public void exchange(@PathVariable Long id, @PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity, @PathVariable BigDecimal total) {
-		CryptoWallet wallet = service.findById(id);
+	@PutMapping("/crypto-wallet/{email}/from/{from}/to/{to}/quantity/{quantity}/total/{total}")
+	public CryptoWallet exchange(@PathVariable String email, @PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity, @PathVariable BigDecimal total) {
+		CryptoWallet wallet = service.findByEmailAddress(email);
 		
 		switch (from.toLowerCase()) {
 		case "btc":
@@ -64,11 +64,11 @@ public class CryptoWalletController {
 			break;
 		}
 		
-		service.update(wallet);
+		return service.update(wallet);
 	}
 	
-	@PutMapping("/crypto-wallet/{id}/update/{update}/quantity/{quantity}")
-	public CryptoWallet updateOne(@PathVariable Long id, @PathVariable String update, @PathVariable BigDecimal quantity) {
-		return service.updateOne(id, update, quantity);
+	@PutMapping("/crypto-wallet/{email}/update/{update}/quantity/{quantity}")
+	public CryptoWallet updateOne(@PathVariable String email, @PathVariable String update, @PathVariable BigDecimal quantity) {
+		return service.updateOne(email, update, quantity);
 	}
 }

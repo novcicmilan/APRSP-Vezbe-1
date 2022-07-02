@@ -18,16 +18,11 @@ public class BankAccountController {
 	public BankAccount getBankAccount(@PathVariable String email) {
 		return bankAccountRepository.findByEmailAddress(email);
 	}
-	
-	@GetMapping("/bank-account/{id}")
-	public BankAccount getBankAccount(@PathVariable Long id) {
-		return bankAccountRepository.findById(id).get();
-	}
 
-	@PutMapping("/bank-account/{id}/from/{from}/to/{to}/amount/{amount}/total/{total}")
-	public void exchangeCurrency(@PathVariable Long id, @PathVariable String from, @PathVariable String to,
+	@PutMapping("/bank-account/{email}/from/{from}/to/{to}/amount/{amount}/total/{total}")
+	BankAccount exchangeCurrency(@PathVariable String email, @PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal amount, @PathVariable BigDecimal total) {
-		BankAccount bankAcc = bankAccountRepository.findById(id).get();
+		BankAccount bankAcc = bankAccountRepository.findByEmailAddress(email);
 		
 		switch (from.toUpperCase()) {
 		case "USD":
@@ -67,13 +62,13 @@ public class BankAccountController {
 			break;
 		}
 				
-		bankAccountRepository.save(bankAcc);
+		return bankAccountRepository.save(bankAcc);
 	}
 	
-	@PutMapping("/bank-account/{id}/update/{update}/quantity/{quantity}")
-	public BankAccount updateOne(@PathVariable Long id, @PathVariable String update, @PathVariable BigDecimal quantity) {
+	@PutMapping("/bank-account/{email}/update/{update}/quantity/{quantity}")
+	public BankAccount updateOne(@PathVariable String email, @PathVariable String update, @PathVariable BigDecimal quantity) {
 		
-		BankAccount bankAcc = bankAccountRepository.findById(id).get();
+		BankAccount bankAcc = bankAccountRepository.findByEmailAddress(email);
 		
 		switch (update.toUpperCase()) {
 		case "USD":

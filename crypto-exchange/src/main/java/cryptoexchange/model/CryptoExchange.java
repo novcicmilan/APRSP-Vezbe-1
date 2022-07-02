@@ -21,7 +21,7 @@ public class CryptoExchange {
 	@Column(name = "crypto_to")
 	private String to;
 	
-	@Column
+	@Column(precision = 20, scale = 5)
 	private BigDecimal multiple;
 	
 	@Transient

@@ -22,7 +22,7 @@ public class CryptoWalletService {
 
 	public CryptoWallet create (CreateCryptoWalletDto createDto) {
 		try {
-			BankAccountDto temp = proxy.getBankAccount(createDto.getBankAccountId());
+			BankAccountDto temp = proxy.getBankAccount(createDto.getEmailAddress());
 			if(temp == null) {
 				throw new Exception("Bank Account not found");
 			}
@@ -32,7 +32,6 @@ public class CryptoWalletService {
 			create.setBtc(createDto.getBTC().multiply(new BigDecimal(100)));
 			create.setEth(createDto.getETH().multiply(new BigDecimal(100)));
 			create.setId(createDto.getId());
-			create.setBankAccountId(createDto.getBankAccountId());
 			create.setEmailAddress(createDto.getEmailAddress());
 			
 			return repo.save(create);
@@ -43,18 +42,16 @@ public class CryptoWalletService {
 		}
 	}
 	
-	public CryptoWallet findById(Long id) {
-		return repo.findById(id).orElseThrow(()->{
-			throw new RuntimeException("Crypto wallet not found!");
-		});
+	public CryptoWallet findByEmailAddress(String email) {
+		return repo.findByEmailAddress(email);
 	}
 	
-	public void update(CryptoWallet wallet) {
-		repo.save(wallet);
+	public CryptoWallet update(CryptoWallet wallet) {
+		return repo.save(wallet);
 	}
 	
-	public CryptoWallet updateOne(Long id, String update, BigDecimal quantity) {
-		CryptoWallet wallet = findById(id);
+	public CryptoWallet updateOne(String email, String update, BigDecimal quantity) {
+		CryptoWallet wallet = findByEmailAddress(email);
 		
 		switch(update.toLowerCase()) {
 		case "btc":

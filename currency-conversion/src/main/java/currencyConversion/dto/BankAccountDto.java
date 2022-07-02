@@ -15,6 +15,8 @@ public class BankAccountDto {
 	private BigDecimal eur;
 	
 	private BigDecimal rsd;
+	
+	private String emailAddress;
 
 	public Long getId() {
 		return id;
@@ -38,5 +40,9 @@ public class BankAccountDto {
 
 	public BigDecimal getRsd() {
 		return rsd;
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 }

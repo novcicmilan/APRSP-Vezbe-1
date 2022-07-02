@@ -9,6 +9,6 @@ import cryptowallet.dto.BankAccountDto;
 @FeignClient(name = "bank-account")
 public interface BankAccountProxy {
 
-	@GetMapping("/bank-account/{id}")
-	BankAccountDto getBankAccount(@PathVariable Long id);
+	@GetMapping("/bank-account/{email}")
+	BankAccountDto getBankAccount(@PathVariable String email);
 }

@@ -20,7 +20,7 @@ public class CurrencyExchangeController {
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public CurrencyExchange getExchange(@PathVariable String from, @PathVariable String to) {
 		String port = environment.getProperty("local.server.port");
-		CurrencyExchange temp = repo.findByFromAndTo(from, to);
+		CurrencyExchange temp = repo.findByFromAndTo(from.toUpperCase(), to.toUpperCase());
 		return new CurrencyExchange(temp.getId(), from, to, temp.getConversionMultiple(), port);
 	}
 }
